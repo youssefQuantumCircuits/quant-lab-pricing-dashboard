@@ -1,48 +1,50 @@
-# 🧠 Quant Lab: Neural Network Option Pricing Dashboard
 
-This project is a live, real-time **option pricing dashboard** powered by machine learning. It pulls current market data via Yahoo Finance, processes features like moneyness and time to expiry, and uses a trained **neural network model** to estimate theoretical option prices.
+# 🌲 Option Pricing Dashboard — Random Forest vs Neural Network
 
-## 🚀 Features
-
-- Fetches live option chains (calls and puts)
-- Trains a neural network on real-world option data
-- Predicts and compares market vs model prices
-- Visualizes prediction performance
-- Deployable via Streamlit Cloud
-
-## 📦 Files Included
-
-| File                | Description                                     |
-|---------------------|-------------------------------------------------|
-| `app.py`            | Main Streamlit app                             |
-| `fetch_data.py`     | Pulls historical option data                   |
-| `preprocess.py`     | Builds ML training features                    |
-| `train_nn_model.py` | Trains a neural network model                  |
-| `live_test_nn.py`   | Predicts on real-time options using the model  |
-| `scaler.pkl`        | StandardScaler object for feature normalization |
-| `nn_option_pricer.h5` | Trained Keras model                           |
-| `requirements.txt`  | Python dependencies for deployment             |
-
-## 📈 Example Prediction Plot
-
-Predicted vs actual option prices (live):
-
-![Prediction Example](https://via.placeholder.com/600x300.png?text=Prediction+Plot)
-
-## ⚙️ How to Run Locally
-
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-## 🌐 Deploy on Streamlit Cloud
-
-1. Push files to a GitHub repo
-2. Go to [Streamlit Cloud](https://streamlit.io/cloud)
-3. Deploy from your GitHub, selecting `app.py` as the entry point
+This project is a real-time, interactive **option pricing dashboard** that compares predictions from a **Random Forest model** and a **Neural Network model** using live option chain data from Yahoo Finance.
 
 ---
 
-Created by **Youssef Mahmoud**  
-Part of an independent quant research lab.
+## 🚀 Features
+
+- 🔄 Fetches **live call/put option chains** using `yfinance`
+- 🧠 Predicts prices using a **Neural Network (NN)** trained on implied volatility, moneyness, etc.
+- 🌲 Trains a **Random Forest (RF)** model *live* in the app, avoiding model file compatibility issues
+- 📊 Displays prediction comparison visually and in a table
+- ✅ Fully deployable via **Streamlit Cloud**
+
+---
+
+## 📦 Files Included
+
+| File                   | Description                                              |
+|------------------------|----------------------------------------------------------|
+| `app.py`               | Streamlit app with live RF model training and prediction |
+| `live_test_nn.py`      | Neural network loader + live predictions                 |
+| `fetch_data.py`        | Fetch option chains (historical use)                     |
+| `preprocess.py`        | Feature engineering script (for offline use)             |
+| `scaler.pkl`           | StandardScaler for NN model features                     |
+| `nn_option_pricer.h5`  | Pre-trained NN model                                     |
+| `requirements.txt`     | All Python packages needed to run the app                |
+| `README.md`            | This documentation file                                  |
+
+---
+
+## 📈 Model Comparison Plot
+
+The app plots actual market prices vs predictions:
+
+- 🔵 **Blue dots** = Neural Network predictions (fixed model)
+- 🟠 **Orange dots** = Random Forest predictions (live-trained)
+- 🔴 **Red dashed line** = Perfect prediction line
+
+This makes it easy to **spot underperformance or bias** in either model.
+
+---
+
+## 🧪 Local Setup
+
+Install dependencies and run:
+```bash
+pip install -r requirements.txt
+streamlit run app.py
