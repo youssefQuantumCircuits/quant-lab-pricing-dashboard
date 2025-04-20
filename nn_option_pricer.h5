@@ -1,0 +1,19 @@
+import numpy as np
+import tensorflow as tf
+
+# Dummy data (you can replace with real features/targets later)
+X_dummy = np.random.rand(100, 6)
+y_dummy = np.random.rand(100)
+
+model = tf.keras.Sequential([
+    tf.keras.layers.Dense(64, activation='relu', input_shape=(6,)),
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dense(1)
+])
+model.compile(optimizer='adam', loss='mean_absolute_error')
+model.fit(X_dummy, y_dummy, epochs=5, batch_size=16, verbose=1)
+
+# Save the model
+model.save("nn_option_pricer.h5")
+from google.colab import files
+files.download("nn_option_pricer.h5")
